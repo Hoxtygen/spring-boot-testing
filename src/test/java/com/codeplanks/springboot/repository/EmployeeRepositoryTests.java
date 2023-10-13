@@ -5,6 +5,7 @@ import com.codeplanks.springboot.model.Employee;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,17 +19,21 @@ public class EmployeeRepositoryTests {
   @Autowired
   private EmployeeRepository employeeRepository;
 
-  // JUnit test for save employee operation
-  @DisplayName("save employee operation")
-  @Test
-  public void givenEmployeeObject_whenSave_thenReturnSavedEmployee() {
-    // given - precondition or setup
-    Employee employee = Employee.builder()
+  private Employee employee;
+
+  @BeforeEach
+  public void setup() {
+    employee = Employee.builder()
             .email("shaolin@yahoo.com")
             .firstName("Shaolin")
             .lastName("Dragon")
             .build();
+  }
 
+  // JUnit test for save employee operation
+  @DisplayName("save employee operation")
+  @Test
+  public void givenEmployeeObject_whenSave_thenReturnSavedEmployee() {
     // when - action or the behaviour we're testing for
     Employee savedEmployee = employeeRepository.save(employee);
 
@@ -42,18 +47,12 @@ public class EmployeeRepositoryTests {
   @Test
   public void givenEmployeesList_whenFindAll_thenEmployeesList() {
     // Given - precondition or setup
-    Employee employee1 = Employee.builder()
-            .email("shaolin@yahoo.com")
-            .firstName("Shaolin")
-            .lastName("Dragon")
-            .build();
-
     Employee employee2 = Employee.builder()
             .email("dragon@yahoo.com")
             .firstName("Dragon")
             .lastName("Haylin")
             .build();
-    employeeRepository.save(employee1);
+    employeeRepository.save(employee);
     employeeRepository.save(employee2);
 
     // When - action or the behaviour we're testing for
@@ -69,11 +68,6 @@ public class EmployeeRepositoryTests {
   @Test
   public void givenEmployeeObject_whenFindById_thenReturnEmployeeObject() {
     // Given - precondition or setup
-    Employee employee = Employee.builder()
-            .email("shaolin@yahoo.com")
-            .firstName("Shaolin")
-            .lastName("Dragon")
-            .build();
     employeeRepository.save(employee);
 
     // When - action or the behaviour we're testing for
@@ -88,11 +82,6 @@ public class EmployeeRepositoryTests {
   @Test
   public void givenEmployeeEmail_whenFindByEmail_thenReturnEmployeeObject() {
     // Given - precondition or setup
-    Employee employee = Employee.builder()
-            .email("shaolin@yahoo.com")
-            .firstName("Shaolin")
-            .lastName("Dragon")
-            .build();
     employeeRepository.save(employee);
 
     // When - action or the behaviour we're testing for
@@ -107,11 +96,6 @@ public class EmployeeRepositoryTests {
   @Test
   public void givenEmployeeObject_whenUpdateEmployee_thenReturnUpdatedEmployee() {
     // Given - precondition or setup
-    Employee employee = Employee.builder()
-            .email("shaolin@yahoo.com")
-            .firstName("Shaolin")
-            .lastName("Dragon")
-            .build();
     employeeRepository.save(employee);
 
     // When - action or the behaviour we're testing for
@@ -130,11 +114,6 @@ public class EmployeeRepositoryTests {
   @Test
   public void givenEmployeeObject_whenDelete_thenRemoveEmployee() {
     // Given - precondition or setup
-    Employee employee = Employee.builder()
-            .email("shaolin@yahoo.com")
-            .firstName("Shaolin")
-            .lastName("Dragon")
-            .build();
     employeeRepository.save(employee);
 
     // When - action or the behaviour we're testing for
