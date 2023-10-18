@@ -23,7 +23,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     Optional<Employee> savedEmployee = employeeRepository.findByEmail(employee.getEmail());
     if (savedEmployee.isPresent()) {
       throw new ResourceNotFoundException(
-              "Employee already exits with the given email " + employee.getEmail());
+              "Employee already exists with the given email " + employee.getEmail());
     }
     return employeeRepository.save(employee);
   }
